@@ -78,9 +78,9 @@ body {
     gap: var(--spacing-medium);
 
 }
-#hourly-forecast .hourly-container .time{
+/* #hourly-forecast .hourly-container .time{
 
-}
+} */
 #hourly-forecast .hourly-container .icon {
     height: 100px;
     width: 100px;
