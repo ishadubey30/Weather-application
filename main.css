@@ -93,6 +93,7 @@ body {
 
 #five-day-forecast{
     grid-area: fiveday;
+    text-align: center;
 }
 
 #feels-like{
