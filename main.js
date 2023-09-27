@@ -10,7 +10,7 @@
    const data = await reponse.json()
    return data.list.map(forecast => {
     const {main : {temp , temp_max , temp_min} , dt , dt_txt , weather : {description , icon }} = forecast
-    return {temp , temp_max , temp_min , dt , dt_txt, icon }
+    return {temp , temp_max , temp_min , dt , dt_txt, description ,icon }
    })
  }
 // const 
@@ -22,12 +22,22 @@
     for (let {temp , icon , dt_txt} of dataForTwelveHours){
         innerHTMLString += `<article>
         <h2 class="time">${dt_txt.split(" ")[1]}</h2>
-        <img class="icon" src="${createIconUrl(icon)}" alt="" /> 
+        <img class="icon" src="${createIconUrl(icon)}" > 
         <p class="hourly-temp">${FormatTemperature(temp)}</p>
     </article>`
     }
+    hourlyContainer.innerHTML = innerHTMLString
 
  }
+
+
+const loadfeelslike = ({main : {feels_like}}) =>{
+   let container = document.querySelector("#feels-like") 
+   container.querySelector(".feelslike-temp").textContent = FormatTemperature(feels_like)}
+
+   const humidity = ({main : { humidity}}) =>{
+    let container = document.querySelector("#humidity") 
+    container.querySelector(".humid").textContent = ` ${humidity} % ` }
 
 const createIconUrl = (icon) => `https://openweathermap.org/img/wn/${icon}@2x.png`
 const FormatTemperature = (temp) => `${temp?.toFixed(1)}゜`
@@ -46,36 +56,7 @@ const loadCurrentForecast = ({ name, main: { temp, temp_max, temp_min }, weather
      loadCurrentForecast(currentWeather)
     const hourlyForecast = await getHourlyData(currentWeather)
      loadHourlyForecast(hourlyForecast)
-    
-
+    loadfeelslike(currentWeather)
+humidity(currentWeather)
 
  })
-
-// const API_KEY = "137d7f888186063e2802880671682c13";
-
-// const getCurrentWeatherData = async () => {
-//     const city = "pune";
-//     try {
-//         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`);
-//         if (!response.ok) {
-//             throw new Error("Network response was not ok");
-//         }
-//         return response.json();
-//     } catch (error) {
-//         console.error("Error fetching weather data:", error);
-//     }
-// }
-
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//     try {
-//         const currentWeather = await getCurrentWeatherData();
-//         if (currentWeather) {
-//             loadCurrentForecast(currentWeather);
-//         } else {
-//             console.error("No weather data received.");
-//         }
-//     } catch (error) {
-//         console.error("Error during initialization:", error);
-//     }
-// });
