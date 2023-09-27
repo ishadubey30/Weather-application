@@ -14,9 +14,9 @@
    })
  }
 // const 
- const loadHourlyForecast = (getHourlyData) => { 
-    console.log(getHourlyData)
-    let dataForTwelveHours = getHourlyData.slice(1,13)
+ const loadHourlyForecast = (hourlyForecast) => { 
+    console.log(hourlyForecast)
+    let dataForTwelveHours = hourlyForecast.slice(1,13)
     const hourlyContainer = document.querySelector(".hourly-container")
     let innerHTMLString = ``
     for (let {temp , icon , dt_txt} of dataForTwelveHours){
@@ -44,8 +44,8 @@ const loadCurrentForecast = ({ name, main: { temp, temp_max, temp_min }, weather
  document.addEventListener("DOMContentLoaded" , async () => {
      const currentWeather = await getCurrentWeatherData()
      loadCurrentForecast(currentWeather)
-     getHourlyData(currentWeather)
-     loadHourlyForecast(getHourlyData)
+    const hourlyForecast = await getHourlyData(currentWeather)
+     loadHourlyForecast(hourlyForecast)
     
 
 
