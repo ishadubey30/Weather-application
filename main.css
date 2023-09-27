@@ -96,6 +96,10 @@ body {
     text-align: center;
 }
 
+#five-day-forecast .5dayforecast-container {
+
+}
+
 #feels-like{
     grid-area: feelslike;
 }
