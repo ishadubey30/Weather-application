@@ -92,13 +92,13 @@ let selectedCity
     const dayWiseForcast = calculateDayWiseForecast(hourlyForecast)    
      //we have multiple entries for a day eg 6pm 9pm so we have to group the entries together and use 
      //min and max temp of the entries . we will group the information date wise and for that we will use map.
-    const container = document.querySelector(".fivedayforecast-container") 
+    const container = document.querySelector(".five-day-forecast-container") 
      let dayWiseInfo = ""
      Array.from(dayWiseForcast).map(([day , {temp_max , temp_min , icon}], index) => {
          if (index < 5){
          dayWiseInfo += `<article class="day-wise-forecast">
          <h3 class="day">${index == 0 ? "Today" : day}</h3>
-         <img src = "${createIconUrl(icon)}" alt="">
+         <img class="icon" src = "${createIconUrl(icon)}" alt="">
          <p class="min-temp">${FormatTemperature(temp_min)}</p
          <p class="max-temp">${FormatTemperature(temp_max)}</p>
      </article> `
